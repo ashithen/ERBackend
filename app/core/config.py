@@ -1,9 +1,11 @@
-from pydantic import BaseSettings
+from pydantic import BaseModel
 import os
 
-class Settings(BaseSettings):
+
+class Settings(BaseModel):
     app_name: str = "LearnIt"
     max_file_size: int = 5 * 1024 * 1024  # 5 MB in bytes
-    env = os.getenv("ENV", "local")
+    env: str = os.getenv("ENV", "local")
+
 
 settings = Settings()

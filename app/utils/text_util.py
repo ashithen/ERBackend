@@ -1,20 +1,12 @@
-from PyPDF2 import PdfReader
+import tempfile
 
-def extract_text_from_pdf(file):
-    """
-    Extracts text from a given PDF file.
+import pymupdf4llm
+from fastapi import UploadFile
 
-    Args:
-        file: A file object representing the PDF.
 
-    Returns:
-        str: The extracted text from the PDF.
-    """
-    try:
-        reader = PdfReader(file)
-        text = ""
-        for page in reader.pages:
-            text += page.extract_text()
-        return text
-    except Exception as e:
-        raise ValueError(f"An error occurred while reading the PDF: {e}")
+def extract_text_from_pdf(upload_file: UploadFile) -> str:
+    with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+        temp_file.write(upload_file.file.read())
+        md_text = pymupdf4llm.to_markdown(temp_file.name)
+    return md_text
+

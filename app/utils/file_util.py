@@ -1,5 +1,5 @@
 from fastapi import UploadFile
-from configs.config import settings
+from ..core.config import settings
 
 
 class FileValidationError(Exception):

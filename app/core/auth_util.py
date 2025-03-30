@@ -8,7 +8,7 @@ from app.core.config import settings
 def init_firebase():
     try:
         if settings.env == "local":
-            cred = credentials.Certificate("lecturelift_serviceaccount.json")
+            cred = credentials.Certificate("app/core/lecturelift_serviceaccount.json")
         else:
             cred = credentials.ApplicationDefault() # For GCP
         firebase_admin.initialize_app(cred)
