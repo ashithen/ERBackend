@@ -20,6 +20,6 @@ async def verify_and_get_user(auth_token: Annotated[str, Header()]):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Authorization header is missing.")
     try:
         decoded_token = auth.verify_id_token(auth_token)
-        return decoded_token
+        return decoded_token["user_id"]
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid auth token.")
