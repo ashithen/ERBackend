@@ -1,12 +1,15 @@
 from contextlib import asynccontextmanager
+from datetime import datetime
 from typing import Annotated
 
 from fastapi import Depends, FastAPI, UploadFile, Header
 from app.core.auth_util import verify_and_get_user
 from app.core.auth_util import init_firebase
+from app.models.data_model import UserDocData
 from app.utils.file_util import validate_pdf_file
 # from app.utils.text_util import extract_text_from_pdf
 from app.utils.text_util import pypdf2_extract
+from app.core.sql_util import SessionDep
 
 
 
@@ -22,7 +25,8 @@ User_ID_Dep = Annotated[str, Depends(verify_and_get_user)]
 
 
 @app.get("/")
-async def root():
+async def root(session : SessionDep):
+    print(session)
     return {"message": "Hello World"}
 
 
@@ -30,6 +34,7 @@ async def root():
 async def upload_file(file: UploadFile, user_id: User_ID_Dep):
     validate_pdf_file(file)
     extracted_text = pypdf2_extract(file)
+    user_doc_data = UserDocData(user_id=user_id, extracted_text=extracted_text, upload_time=datetime.now())
 
     return {"filename": file.filename, "text": extracted_text, "user":user_id}
     
