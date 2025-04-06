@@ -1,11 +1,15 @@
 from typing import Annotated
 
-from fastapi import Depends, FastAPI, HTTPException, Query
-from sqlmodel import Field, Session, SQLModel, create_engine, select
+from fastapi import Depends
+from sqlmodel import Session, create_engine
+
+from app.core.config import settings
 
 
 def init_sql_database():
-    sqlite_url = "mysql+pymysql://data_admin@34.121.59.245:3306/doc_data"
+    sqlite_url = (
+        f"mysql+pymysql://{settings.sql_username}@{settings.sql_address}:{settings.sql_port}/{settings.sql_database}"
+    )
 
     connect_args = {"check_same_thread": False}
     return create_engine(sqlite_url, connect_args=connect_args)

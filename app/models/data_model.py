@@ -5,6 +5,7 @@ from pydantic import BaseModel
 
 class UserDocData(BaseModel):
     user_id: str
+    doc_id: int | None = None
     extracted_text: str
     upload_time: datetime
 
@@ -17,13 +18,23 @@ class DocResultData(BaseModel):
     flash_quiz: dict
 
 class LongQuestionData(BaseModel):
-    qid: str
+    doc_id: int
+    qid: int
     question: str
     answer: str
 
-class AttemptData:
+class AttemptData(BaseModel):
     doc_id : int
     attempt_num : int
     is_success : bool
     attempt_details : dict
     attempt_time : datetime
+
+class UserDocWithAttemptsData(UserDocData):
+    user_id: str
+    doc_id: int
+    extracted_text: str | None
+    upload_time: datetime
+    attempts: list[AttemptData]
+
+

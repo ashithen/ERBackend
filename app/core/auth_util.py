@@ -1,4 +1,4 @@
-from fastapi import Header, status, HTTPException
+from fastapi import Header, status, HTTPException, Depends
 import firebase_admin
 from firebase_admin import credentials, auth
 from typing_extensions import Annotated
@@ -23,3 +23,5 @@ async def verify_and_get_user(auth_token: Annotated[str, Header()]):
         return decoded_token["user_id"]
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid auth token.")
+
+User_ID_Dep = Annotated[str, Depends(verify_and_get_user)]
