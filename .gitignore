@@ -2,3 +2,6 @@
 /.idea/
 /.vscode/
 app/core/lecturelift_serviceaccount.json
+
+.env
+.env.*
