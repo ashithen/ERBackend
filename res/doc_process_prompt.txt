@@ -12,8 +12,9 @@
         "mindmap": {
           "structure": {
             "topics": {
-              "subtopics": {
-                "points": "concise_key_concepts"
+              "subtopics":{
+                "concise_key_points"
+                }
               }
             }
           },
@@ -25,6 +26,11 @@
 			"answer": "descriptive",
             "focus": "conceptual_understanding",
             "coverage": "all_main_topics"
+          },
+		  "answer_format": {
+            "type": "model_answer",
+            "length": "concise_but_complete",
+            "clarity": "high_conceptual_clarity"
           }
         },
         "flash_quiz": {
@@ -49,7 +55,7 @@
               "anchor_to_existing_knowledge"
             ]
           },
-          "output_format": "method_applied: enhanced_concept_description"
+          "output_format": "topic name: enhanced_concept_description"
         }
       }
     },

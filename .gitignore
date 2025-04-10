@@ -1,7 +1,7 @@
 /.venv/
 /.idea/
 /.vscode/
-app/core/lecturelift_serviceaccount.json
+lecturelift_serviceaccount.json
 
 .env
 .env.*
