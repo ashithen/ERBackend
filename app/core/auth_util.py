@@ -1,7 +1,8 @@
-from fastapi import Header, status, HTTPException, Depends
 import firebase_admin
+from fastapi import Header, status, HTTPException, Depends
 from firebase_admin import credentials, auth
 from typing_extensions import Annotated
+
 from app.core.config import settings
 from app.utils.path_util import get_absolute_path
 

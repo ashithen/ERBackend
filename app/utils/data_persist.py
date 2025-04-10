@@ -17,6 +17,7 @@ async def save_doc_result(user_doc_result: DocResultData):
         session.add(doc_result_sql)
         session.commit()
 
+
 async def save_long_questions(long_questions: list[LongQuestionData]):
     with get_session() as session:
         for long_question in long_questions:
@@ -66,7 +67,8 @@ def delete_doc(user_id: str, doc_id: int):
         if not user_doc:
             raise Exception("No such document found for given user")
         session.delete(user_doc)
-        doc_result = session.query(DocResultBaseSQL).filter(DocResultBaseSQL.user_id == user_id,DocResultBaseSQL.doc_id == doc_id).first()
+        doc_result = session.query(DocResultBaseSQL).filter(DocResultBaseSQL.user_id == user_id,
+                                                            DocResultBaseSQL.doc_id == doc_id).first()
         if doc_result:
             session.delete(doc_result)
         all_attempts = session.query(AttemptBaseSQL).filter(AttemptBaseSQL.doc_id == doc_id).all()

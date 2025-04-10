@@ -1,6 +1,5 @@
 import os
 
-from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -20,8 +19,6 @@ class Settings(BaseSettings):
 
     # LLM
     gemini_api_key: str
-
-
 
 
 settings = Settings()

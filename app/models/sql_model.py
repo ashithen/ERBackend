@@ -13,7 +13,7 @@ class UserDocBaseSQL(SQLModel, table=True):
     upload_time: datetime
 
     @classmethod
-    def from_user_doc_data(cls, user_doc_data:UserDocData):
+    def from_user_doc_data(cls, user_doc_data: UserDocData):
         return cls(
             user_id=user_doc_data.user_id,
             extracted_text=user_doc_data.extracted_text,
@@ -35,6 +35,7 @@ class UserDocExtendedSQL(SQLModel, table=True):
     upload_time: datetime
     # Relationships
     attempts: list["AttemptBaseSQL"] = Relationship(back_populates="user_doc")
+
     # doc_result: list["DocResult"] = Relationship(back_populates="user_doc")
 
     def get_user_data_with_attempts(self) -> UserDocWithAttemptsData:
@@ -48,9 +49,6 @@ class UserDocExtendedSQL(SQLModel, table=True):
             upload_time=self.upload_time,
             attempts=attempts_data
         )
-
-
-
 
 
 class AttemptBaseSQL(SQLModel, table=True):
@@ -94,7 +92,6 @@ class DocResultBaseSQL(SQLModel, table=True):
             flash_quiz=doc_result_data.flash_quiz
         )
 
-
     # Relationships
     # user_doc: Optional[UserDoc] = Relationship(back_populates="doc_result")
 
@@ -113,4 +110,3 @@ class LongQuestionSQL(SQLModel, table=True):
             question=long_question_data.question,
             answer=long_question_data.answer
         )
-
