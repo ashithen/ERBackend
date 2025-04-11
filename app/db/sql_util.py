@@ -1,3 +1,4 @@
+import urllib
 from typing import Annotated
 
 from fastapi import Depends
@@ -7,12 +8,11 @@ from app.core.config import settings
 
 
 def init_sql_database():
+    pwd = urllib.parse.quote_plus(settings.sql_password)
     sqlite_url = (
-        f"mysql+pymysql://{settings.sql_username}@{settings.sql_address}:{settings.sql_port}/{settings.sql_database}"
+        f"mysql+pymysql://{settings.sql_username}:{pwd}@{settings.sql_address}:{settings.sql_port}/{settings.sql_database}"
     )
-
-    connect_args = {"check_same_thread": False}
-    return create_engine(sqlite_url, connect_args=connect_args)
+    return create_engine(sqlite_url)
 
 
 def get_session():

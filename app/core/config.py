@@ -13,13 +13,14 @@ class Settings(BaseSettings):
 
     # SQL Settings
     sql_username: str
+    sql_password: str
     sql_address: str
     sql_port: int = 3306
     sql_database: str
 
     # LLM
     gemini_api_key: str
+    llm_model: str = "gemini-2.0-flash"
 
 
 settings = Settings()
-# print(settings.model_dump())

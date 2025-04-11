@@ -42,7 +42,7 @@
               "explanation": "1-sentence_rationale"
             }
           },
-          "coverage": "all the topics"
+          "coverage": "all the topics, try to come up with atleast 10 questions"
         },
         "memory_enhancement": {
           "techniques": {
@@ -72,4 +72,53 @@
       "quiz": "distractor_quality_check"
     }
   }
+}
+
+Example Output:
+{
+	"mindmap": {
+		"topic_1": {
+			"sub_topic_1": [
+				"point_1",
+				"point_2"
+			],
+			"sub_topic_2": [
+				"point_1"
+			]
+		},
+		"topic_2": {
+			"sub_topic_1": [
+				"point_1"
+			]
+		}
+	},
+	"long_answer_questions": [
+		{
+			"question": "question 1",
+			"answer": "answer 1"
+		},
+		{
+			"question": "question 2",
+			"answer": "answer 2"
+		}
+	],
+	"flash_quiz": [
+		{
+			"question": "flash quiz 1",
+			"options": [
+				"option 1",
+				"option 2",
+				"option 3",
+				"option 4"
+			],
+			"answer": {
+				"correct": "1 (referencing correct option in 1 indexed)",
+				"explanation": "RANSAC aims to minimize the impact of outliers when estimating a mathematical model."
+			}
+		}
+	],
+	"memory_tips": {
+		"topic_1": "description",
+		"topic_2": "description"
+	}
 }

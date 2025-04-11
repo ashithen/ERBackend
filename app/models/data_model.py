@@ -6,20 +6,24 @@ from pydantic import BaseModel
 class UserDocData(BaseModel):
     user_id: str
     doc_id: int | None = None
-    extracted_text: str
+    extracted_text: str | None = None
     upload_time: datetime
 
 
 class DocResultData(BaseModel):
     user_id: str
     doc_id: int
-    mind_map: dict
-    memory: dict
-    long_question: dict
-    flash_quiz: dict
+    mindmap: dict
+    memory_tips: dict
+    long_question: list[dict]
+    flash_quiz: list[dict]
+
+    class Config:
+        extra = "ignore"
 
 
 class LongQuestionData(BaseModel):
+    user_id: str
     doc_id: int
     qid: int
     question: str
