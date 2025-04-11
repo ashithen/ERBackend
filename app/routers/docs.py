@@ -1,8 +1,9 @@
 import asyncio
-from datetime import datetime
+from datetime import datetime, timezone
 
 from fastapi import APIRouter
 from fastapi import UploadFile
+from loguru import logger
 
 from app.core.auth_util import User_ID_Dep
 from app.db.data_persist import save_all_results
@@ -19,9 +20,11 @@ router = APIRouter()
 async def upload_file(file: UploadFile, user_id: User_ID_Dep, session: SessionDep):
     validate_pdf_file(file)
     extracted_text = pypdf2_extract(file)
-    user_doc_data = UserDocData(user_id=user_id, extracted_text=extracted_text, upload_time=datetime.now())
+    user_doc_data = UserDocData(user_id=user_id, extracted_text=extracted_text,
+                                upload_time=datetime.now(timezone.utc))
     doc_id, doc_res_dict = await asyncio.gather(save_user_doc(user_doc_data, session),
                                                 generate_doc_result(extracted_text))
+    logger.info(f"added {doc_id} to db")
     user_doc_data.doc_id = doc_id
     doc_result_data, long_questions = process_doc_result(user_doc_data, doc_res_dict)
     await save_all_results(doc_result_data, long_questions, session)
