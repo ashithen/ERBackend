@@ -1,0 +1,7 @@
+CREATE TABLE `attempts` ( `doc_id` int NOT NULL, `attempt_id` int NOT NULL AUTO_INCREMENT, `attempt_num` int NOT NULL DEFAULT '1', `is_success` tinyint(1) NOT NULL DEFAULT '1', `attempt_details` json NOT NULL, `attempt_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`attempt_id`), KEY `fk_attempts_doc_id` (`doc_id`), CONSTRAINT `fk_attempts_doc_id` FOREIGN KEY (`doc_id`) REFERENCES `user_doc` (`doc_id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `doc_result` ( `user_id` varchar(255) NOT NULL, `doc_id` int NOT NULL, `mind_map` json DEFAULT (json_object()), `memory` json DEFAULT (json_object()), `long_question` json DEFAULT (json_object()), `flash_quiz` json DEFAULT (json_object()), PRIMARY KEY (`user_id`,`doc_id`), CONSTRAINT `fk_doc_result_user_doc` FOREIGN KEY (`user_id`, `doc_id`) REFERENCES `user_doc` (`user_id`, `doc_id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `long_questions` ( `qid` int NOT NULL, `question` text NOT NULL, `answer` text NOT NULL, `doc_id` int NOT NULL, PRIMARY KEY (`doc_id`,`qid`), CONSTRAINT `long_questions_user_doc_doc_id_fk` FOREIGN KEY (`doc_id`) REFERENCES `user_doc` (`doc_id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `user_doc` ( `user_id` varchar(255) NOT NULL, `doc_id` int NOT NULL AUTO_INCREMENT, `extracted_text` longtext NOT NULL, `upload_time` datetime NOT NULL, PRIMARY KEY (`doc_id`), KEY `idx_user_id` (`user_id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci

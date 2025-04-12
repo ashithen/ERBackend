@@ -1,2 +1,8 @@
 /.venv/
 /.idea/
+/.vscode/
+logs/
+lecturelift_serviceaccount.json
+
+.env
+.env.*

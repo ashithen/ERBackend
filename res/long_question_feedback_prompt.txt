@@ -1,0 +1,18 @@
+You will be provided with the following three elements:
+- A question
+- The correct answer
+- The student's answer
+
+Your task is to evaluate the student's answer by comparing it with the correct answer. Then, provide constructive feedback and assign a score based on the accuracy of the student's response.
+
+The response must be in the following JSON format:
+{
+  "feedback": "Your explanation here",
+  "score": 2  // Use 2 for fully correct, 1 for partially correct, 0 for completely wrong
+}
+
+Scoring Guidelines:
+2 (Fully Correct): The student's answer matches the correct answer in both content and meaning.
+1 (Partially Correct): The student shows partial understanding but includes inaccuracies or misses key details.
+0 (Completely Wrong): The student’s answer is incorrect, irrelevant, or shows no understanding of the correct answer.
+
